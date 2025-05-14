@@ -10,10 +10,12 @@ const Colors = {
 
 export const Container = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
   background-color: ${Colors.corPrimaria};
-  padding: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  position: relative;
+  padding-top: 20%;
 `;
 
 
@@ -45,7 +47,6 @@ export const ButtonText = styled.Text`
 export const Conteudo = styled.View`
   justify-content: center;
   align-items: center;
-  position: relative;
-  top: -14%;
+
   width: 100%;
 `

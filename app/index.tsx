@@ -3,7 +3,7 @@ import CadastroUsuarioScreen from "@/src/screens/register/register"
 
 export default function Index() {
   return (
-    <CadastroUsuarioScreen/>
+    <LoginScreen/>
   )
 }
 
