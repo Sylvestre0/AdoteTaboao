@@ -15,7 +15,7 @@ export default function LoginScreen(){
         <Title>Adote um Amigo em Taboão</Title>
         <Email/>
         <Password/>
-        <LoginButton onPress={() => router.navigate('/(router)/home')}>
+        <LoginButton onPress={() => router.navigate('/(router)/chat')}>
           <ButtonText>Login</ButtonText>
         </LoginButton>
       </Conteudo>

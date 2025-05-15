@@ -21,7 +21,7 @@ export const InputText = styled.TextInput`
 
 export const NumberInput = styled.TextInput`
   width: 100%;
-  padding: 12px;
+  padding: 60px;
   margin-bottom: 15px;
   border-radius: 8px;
   background-color: ${Colors.corBranca};
@@ -32,3 +32,5 @@ export const NumberInput = styled.TextInput`
 export interface Props {
   placeholder?: string;
 }
+
+export default Colors

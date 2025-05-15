@@ -1,68 +1,58 @@
-import { Text } from "react-native";
-import styled from "styled-components/native";
+import React, { useState,forwardRef } from "react";
+import ChatLogic from "@/src/hook/chatLogic"; 
+import { 
+    Container,BarraUser, Imagem, Nome, MensagensContainer,
+    BalaoEnvia, MensagemTexto, BalaoRecebe, InputArea, Input,
+    BotaoEnviar, TextoBotao } from "@/src/screens/chat/chat.style";
 
+export interface ChatScreenProps {}
 
-const Imagem = styled.Image `
-width: 100px;
-height:100px;
-border-radius:20px;
-`
-const Nome = styled.Text`
-padding-left: 10px;
-`
-const Container = styled.View`
-width:80%;
-border: black;
-`
-const BarraUser = styled.View`
-width:100%;
-height: 110px;
-flex-direction: row;
-background-color:pink;
-align-items:center;
-`
-const ContainerPrincipal = styled.View`
-margin-top:10%;
-justify-content:center;
-align-items:center;`
+const ChatScreen: React.FC<ChatScreenProps> = () => {
+  const [mensagem, setMensagem] = useState("");
+  const chatLogic = ChatLogic({ onSendMessage: (newMessage) => {
+    console.log("Nova mensagem enviada:", newMessage);
+  }});
 
-const BalaoEnvia = styled.View`
-background-color: green;
-width:80%;
-height:45px;
-justify-content:center;
-align-items: left;
-padding-left:10px;`
+  const handleEnviarMensagem = () => {
+    chatLogic.handleEnviarMensagem(mensagem);
+    setMensagem("");
+  };
 
-const BalaoRecebe = styled.View`
-background-color: pink;
-width:80%;
-height:45px;
-justify-content:center;
-align-items: left;
-margin-left:20%;
-padding-left:10px;`
+  return (
+    <Container>
+      <BarraUser>
+        <Imagem source={require("@/src/assets/images/exemplo.png")} />
+        <Nome>Rafael</Nome>
+      </BarraUser>
 
-export default function ChatScreen (){
-    return(
-        <ContainerPrincipal>
-            <Container>
-                <BarraUser>
-                    <Imagem source={require("@/assets/images/exemplo.png")}/>
-                    <Nome>Rafael</Nome>
-                </BarraUser>
-                <BalaoEnvia>
-                    <Text>
-                        viado
-                    </Text>
-                </BalaoEnvia>
+      <MensagensContainer ref={chatLogic.scrollViewRef}>
+        {chatLogic.mensagens.map((msg) => (
+          <React.Fragment key={msg.id}>
+            {msg.enviada ? (
+              <BalaoEnvia>
+                <MensagemTexto>{msg.texto}</MensagemTexto>
+              </BalaoEnvia>
+            ) : (
+              <BalaoRecebe>
+                <MensagemTexto>{msg.texto}</MensagemTexto>
+              </BalaoRecebe>
+            )}
+          </React.Fragment>
+        ))}
+      </MensagensContainer>
 
-                <BalaoRecebe>
-                    <Text>
-                        è você
-                    </Text>
-                </BalaoRecebe>
-            </Container>
-        </ContainerPrincipal>
-    )
-}
+      <InputArea>
+        <Input
+          placeholder="Digite sua mensagem..."
+          value={mensagem}
+          onChangeText={setMensagem}
+        />
+        <BotaoEnviar onPress={handleEnviarMensagem}>
+          <TextoBotao>{">"}</TextoBotao>
+        </BotaoEnviar>
+      </InputArea>
+    </Container>
+  );
+};
+
+export default ChatScreen;
