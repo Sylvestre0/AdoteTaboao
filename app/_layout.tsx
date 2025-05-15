@@ -23,6 +23,7 @@ export default function Layout() {
             title: 'Configurações',
           }}
         />
+        
       </Tabs>
       <StatusBar style="auto" />
     </>

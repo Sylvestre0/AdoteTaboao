@@ -19,6 +19,16 @@ export const InputText = styled.TextInput`
   color: ${Colors.corTextoPrimaria};
 `;
 
+export const NumberInput = styled.TextInput`
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: ${Colors.corBranca};
+  border: 1px solid #DDDDDD;
+  font-size: 16px;
+  color: ${Colors.corTextoPrimaria};
+`
 export interface Props {
   placeholder?: string;
 }
